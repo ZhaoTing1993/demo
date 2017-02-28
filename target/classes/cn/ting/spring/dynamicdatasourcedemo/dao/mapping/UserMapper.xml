@@ -30,7 +30,7 @@
 
         ]]>
   </select>
-    <insert id="insertAccount" parameterType="cn.kiiwii.framework.spring.TestSpring.springwithmybatis.model.Account"
+    <insert id="insertAccount" parameterType="cn.ting.spring.dynamicdatasourcedemo.model.Account"
             keyColumn="`id`" keyProperty="`id`" useGeneratedKeys="true">
         insert into account (name,money) values (#{name},#{money})
     </insert>

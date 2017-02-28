@@ -35,7 +35,7 @@
             <mvc:exclude-mapping path="/listRecommend"/>
             <mvc:exclude-mapping path="/news/getNewsDetail"/>
             <mvc:exclude-mapping path="/css/ceos.css"/>
-            <bean class="cn.kiiwii.framework.interceptor.MyInterceptor"></bean>
+            <bean class="cn.ting.spring.interceptor.MyInterceptor"></bean>
         </mvc:interceptor>
     </mvc:interceptors>
 
