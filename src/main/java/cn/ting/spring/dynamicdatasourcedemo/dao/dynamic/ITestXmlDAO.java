@@ -1,4 +1,4 @@
-package cn.ting.spring.dynamicdatasourcedemo.dao;
+package cn.ting.spring.dynamicdatasourcedemo.dao.dynamic;
 
 import cn.ting.spring.dynamicdatasourcedemo.model.Account;
 import org.springframework.cache.annotation.CacheEvict;
@@ -7,9 +7,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository("testXmlDAO")
+@Repository
 public interface ITestXmlDAO {
-
 
 	public int addMoney(int userId, float money);
 	

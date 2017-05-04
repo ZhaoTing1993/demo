@@ -17,6 +17,8 @@
     http://www.springframework.org/schema/cache/spring-cache.xsd
 	">
 
+    <import resource="spring-admindatasource.xml"/>
+
     <!-- 载入常用的配置 -->
     <context:property-placeholder location="classpath:druid.properties,classpath:jdbc.properties"/>
     <!-- 注解扫描所有包 -->
@@ -29,53 +31,16 @@
 
     <!--扫描缓存注解-->
     <cache:annotation-driven/>
-
-    <bean id="dataSourceCommon" class="com.alibaba.druid.pool.DruidDataSource">
-
-        <property name="driverClassName" value="${jdbc.driverClassName}"/>
-        <property name="url" value="${jdbc.url}"/>
-        <property name="username" value="${jdbc.username}"/>
-        <property name="password" value="${jdbc.password}"/>
-
-        <!-- 配置初始化大小、最小、最大 -->
-        <property name="initialSize" value="${druid.initialSize}"/>
-        <property name="minIdle" value="${druid.minIdle}"/>
-        <property name="maxActive" value="${druid.maxActive}"/>
-
-        <!-- 配置获取连接等待超时的时间 -->
-        <property name="maxWait" value="${druid.maxWait}"/>
-
-        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
-        <property name="timeBetweenEvictionRunsMillis" value="${druid.timeBetweenEvictionRunsMillis}"/>
-
-        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
-        <property name="minEvictableIdleTimeMillis" value="${druid.minEvictableIdleTimeMillis}"/>
-
-        <property name="validationQuery" value="${druid.validationQuery}"/>
-        <property name="testWhileIdle" value="${druid.testWhileIdle}"/>
-        <property name="testOnBorrow" value="${druid.testOnBorrow}"/>
-        <property name="testOnReturn" value="${druid.testOnReturn}"/>
-
-        <!-- 打开PSCache，并且指定每个连接上PSCache的大小（Oracle使用）
-        <property name="poolPreparedStatements" value="true" />
-        <property name="maxPoolPreparedStatementPerConnectionSize" value="20" /> -->
-
-        <!-- 配置监控统计拦截的filters -->
-        <property name="filters" value="${druid.filters}"/>
-
-    </bean>
     
     <bean id="dynamicDataSource" class="cn.ting.spring.dynamicdatasourcedemo.core.datasource.DynamicDataSource">
-        <property name="defaultTargetDataSource" value="datasourceCommon">
-
-        </property>
+        <!--<property name="defaultTargetDataSource" ref="dataSourceCommon"/>-->
     </bean>
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dynamicDataSource"/>
 
         <!-- 使用xml配置，自动扫描mapping.xml文件 -->
-        <property name="mapperLocations" value="classpath:cn/ting/spring/dynamicdatasourcedemo/dao/mapping/*.xml"></property>
+        <property name="mapperLocations" value="classpath:cn/ting/spring/dynamicdatasourcedemo/dao/dynamic/mapping/*.xml"></property>
 
         <property name="typeAliasesPackage" value="cn.ting.spring.dynamicdatasourcedemo.model"/>
 
@@ -84,7 +49,7 @@
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 
         <!-- 使用mapper注解方式 自动扫描接口注解 -->
-        <property name="basePackage" value="cn.ting.spring.dynamicdatasourcedemo.dao"/>
+        <property name="basePackage" value="cn.ting.spring.dynamicdatasourcedemo.dao.dynamic"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
     </bean>
 

@@ -1,6 +1,6 @@
 package cn.ting.spring.dynamicdatasourcedemo.core.datasource;
 
-import cn.ting.spring.dynamicdatasourcedemo.dao.IDynamicDataSourceDao;
+import cn.ting.spring.dynamicdatasourcedemo.dao.common.DynamicDataSourceDao;
 import cn.ting.spring.dynamicdatasourcedemo.model.AdminDataSource;
 import com.alibaba.druid.pool.DruidDataSource;
 import org.apache.ibatis.datasource.DataSourceException;
@@ -8,8 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.*;
@@ -17,12 +15,12 @@ import java.util.*;
 /**
  * Created by ZHAOTING001 on 2017/2/23.
  */
-public class DynamicDataSourceManager implements ApplicationContextAware{
+public class DynamicDataSourceManager{
 
     Logger logger = LoggerFactory.getLogger(DynamicDataSourceManager.class);
 
     @Autowired
-    private IDynamicDataSourceDao dynamicDataSourceDao;
+    private DynamicDataSourceDao dynamicDataSourceDao;
 
     @Autowired
     private DynamicDataSource dynamicDataSource;
@@ -32,7 +30,7 @@ public class DynamicDataSourceManager implements ApplicationContextAware{
     /**
      * 初始化加载创建数据源连接池
      */
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+    public Map<Object, Object> init() throws BeansException {
         logger.info("-------------->开始初始化加载创建动态数据源...");
         //获取所有数据源配置信息
         List<AdminDataSource> dataSourceList = dynamicDataSourceDao.listAdminDataSource();
@@ -41,6 +39,7 @@ public class DynamicDataSourceManager implements ApplicationContextAware{
             createDataSourcePool(adminDataSource);
         }
         logger.info("-------------->初始化加载创建动态数据源完毕，加载数："+dataSourceList.size());
+        return dataSourcePoolMap;
     }
 
     /**

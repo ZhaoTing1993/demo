@@ -20,6 +20,7 @@ public class TestDynamicDatabaseServiceTest {
     @Test
     public void testITestXmlDAO() throws Exception {
         testDynamicDatabaseService.testITestXmlDAO();
+
     }
 
 }

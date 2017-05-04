@@ -1,7 +1,7 @@
 package cn.ting.spring.dynamicdatasourcedemo.service;
 
 import cn.ting.spring.dynamicdatasourcedemo.core.datasource.DataSourceContextHolder;
-import cn.ting.spring.dynamicdatasourcedemo.dao.ITestXmlDAO;
+import cn.ting.spring.dynamicdatasourcedemo.dao.dynamic.ITestXmlDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

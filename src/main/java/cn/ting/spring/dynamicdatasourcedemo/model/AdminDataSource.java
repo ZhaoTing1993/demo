@@ -1,9 +1,13 @@
 package cn.ting.spring.dynamicdatasourcedemo.model;
 
+import java.io.Serializable;
+
 /**
  * Created by ZHAOTING001 on 2017/2/23.
  */
-public class AdminDataSource {
+public class AdminDataSource implements Serializable{
+
+    private static final long serialVersionUID = 3641364594136065148L;
 
     private String datasourceName;
 
