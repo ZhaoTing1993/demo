@@ -59,7 +59,7 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
 
         }
         this.setTargetDataSources(dataSourcePoolMap);
-        logger.info("-------------->初始化加载创建动态数据源完毕，加载数："+dataSourceList.size());
+        logger.info("-------------->初始化加载创建动态数据源完毕，加载数："+dataSourcePoolMap.size());
     }
 
     @Override
