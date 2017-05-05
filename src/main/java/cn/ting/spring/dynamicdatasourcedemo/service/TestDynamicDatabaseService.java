@@ -1,12 +1,14 @@
 package cn.ting.spring.dynamicdatasourcedemo.service;
 
-import cn.ting.spring.dynamicdatasourcedemo.core.datasource.DataSourceContextHolder;
-import cn.ting.spring.dynamicdatasourcedemo.dao.dynamic.ITestXmlDAO;
+import cn.ting.spring.dynamicdatasourcedemo.dao.dynamic.AccountDAO;
 import cn.ting.spring.dynamicdatasourcedemo.model.Account;
+import com.alibaba.fastjson.JSON;
+import org.omg.CORBA.portable.ApplicationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by ZHAOTING001 on 2017/2/23.
@@ -17,35 +19,31 @@ public class TestDynamicDatabaseService {
     Logger logger = LoggerFactory.getLogger(TestDynamicDatabaseService.class);
 
     @Autowired
-    private ITestXmlDAO iTestXmlDAO;
+    private AccountDAO accountDAO;
 
-    public void testITestXmlDAO(){
+    @Transactional
+    public void test1() {
         logger.info("TestDynamicDatabaseService start...");
 
-        try {
-
-            logger.info("set database to test1");
-            DataSourceContextHolder.setDataSourceType("test1");
-            if(iTestXmlDAO.getAccountByUserId(1)==null){
-                Account account1 = new Account();
-                account1.setUserId(1);
-                account1.setMoney(100);
-                iTestXmlDAO.insertAccount(account1);
-            }
-            iTestXmlDAO.addMoney(1,1);
-
-            logger.info("set database to test2");
-            DataSourceContextHolder.setDataSourceType("test2");
-            if (iTestXmlDAO.getAccountByUserId(2)==null) {
-                Account account2 = new Account();
-                account2.setUserId(2);
-                account2.setMoney(100);
-                iTestXmlDAO.insertAccount(account2);
-            }
-            iTestXmlDAO.addMoney(2,2);
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        logger.info("make account1 money +1");
+        if (addMoneyTx(1, 1) > 0) {
+            logger.info("money added");
         }
+
+        if (true)
+            throw new RuntimeException("artificial exc");
+
+        logger.info("make account1 money +1");
+        if (addMoneyTx(2, 1) > 0) {
+            logger.info("money added");
+        }
+
+    }
+
+
+    public int addMoneyTx(Integer userId, float money) {
+        Account account = accountDAO.getAccountByUserId(1);
+        logger.info("account:{}", JSON.toJSONString(account));
+        return accountDAO.addMoney(userId, money);
     }
 }

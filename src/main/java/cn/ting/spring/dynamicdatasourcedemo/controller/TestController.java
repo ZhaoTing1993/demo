@@ -1,5 +1,6 @@
 package cn.ting.spring.dynamicdatasourcedemo.controller;
 
+import cn.ting.spring.dynamicdatasourcedemo.core.datasource.DataSourceContextHolder;
 import cn.ting.spring.dynamicdatasourcedemo.service.TestDynamicDatabaseService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +30,14 @@ public class TestController {
 
         logger.info("test 1 start...");
 
-        testDynamicDatabaseService.testITestXmlDAO();
+        logger.info("set database to test1");
+        DataSourceContextHolder.setDataSourceType("test1");
+
+        try {
+            testDynamicDatabaseService.test1();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return "test1";
     }

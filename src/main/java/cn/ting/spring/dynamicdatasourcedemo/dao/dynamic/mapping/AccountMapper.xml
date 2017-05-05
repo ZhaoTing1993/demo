@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.ting.spring.dynamicdatasourcedemo.dao.dynamic.ITestXmlDAO">
+<mapper namespace="cn.ting.spring.dynamicdatasourcedemo.dao.dynamic.AccountDAO">
     <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache" />-->
     <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
     <update id="addMoney">
