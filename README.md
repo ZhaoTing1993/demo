@@ -26,22 +26,24 @@ INSERT INTO ting_admin_datasource (datasource_name, url, username) VALUES
   ('test2','jdbc:mysql://127.0.0.1:3306/test2','root');  
   
 USE test1;
-CREATE TABLE account (
-  id int not null AUTO_INCREMENT,
-  user_id INT NOT NULL,
-  money DOUBLE NOT NULL ,
-  PRIMARY KEY (id)
-)CHARSET ='utf8';
+CREATE TABLE `account` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `money` double NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `account_user_id_uindex` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 INSERT INTO account(user_id, money) VALUES
   (1,100),(2,100),(3,100);
   
 USE test2;
-CREATE TABLE account (
-  id int not null AUTO_INCREMENT,
-  user_id INT NOT NULL,
-  money DOUBLE NOT NULL ,
-  PRIMARY KEY (id)
-)CHARSET ='utf8';
+CREATE TABLE `account` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `money` double NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `account_user_id_uindex` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 INSERT INTO account(user_id, money) VALUES
   (1,100),(2,100),(3,100);
 ```
