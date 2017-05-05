@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface DynamicDataSourceDao {
 
-    String SELECT = "SELECT datasource_name AS datasouceName," +
+    String SELECT = "SELECT datasource_name AS datasourceName," +
             "  url AS url," +
             "  username AS username," +
             "  password AS password " +

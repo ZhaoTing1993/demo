@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Account implements Serializable{
 	
 	private int id;
-	private String name;
+	private Integer userId;
 	private double money;
 	
 	public Account() {
@@ -17,11 +17,11 @@ public class Account implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+	public Integer getUserId() {
+		return userId;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 	public double getMoney() {
 		return money;
@@ -31,7 +31,7 @@ public class Account implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Account [id=" + id + ", name=" + name + ", money=" + money
+		return "Account [id=" + id + ", userId=" + userId + ", money=" + money
 				+ "]";
 	}
 }

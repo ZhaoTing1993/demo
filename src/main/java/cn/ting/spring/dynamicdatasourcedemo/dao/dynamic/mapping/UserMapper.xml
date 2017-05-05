@@ -3,35 +3,44 @@
 <mapper namespace="cn.ting.spring.dynamicdatasourcedemo.dao.dynamic.ITestXmlDAO">
     <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache" />-->
     <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
-    <select id="findAccountsById" resultType="cn.ting.spring.dynamicdatasourcedemo.model.Account">
-    <![CDATA[
+    <update id="addMoney">
+        UPDATE account
+        SET money = money + #{1}
+        WHERE user_id = #{0}
+    </update>
+
+    <update id="minusMoney">
+        UPDATE account
+        SET money = money - #{1}
+        WHERE user_id = #{0}
+    </update>
 
 
-            select  id as id,
-			 name as name,
-			 money as money
-			 from account
-			 where
-			 id >= #{id}
+    <select id="getAccountByUserId" resultType="cn.ting.spring.dynamicdatasourcedemo.model.Account">
 
+        SELECT
+            id      AS id,
+            user_id AS userId,
+            money   AS money
+        FROM account
+        WHERE
+            user_id = #{0}
 
-        ]]>
-  </select>
+    </select>
     <select id="getAccountById" parameterType="int"
             resultType="cn.ting.spring.dynamicdatasourcedemo.model.Account">
-    <![CDATA[
 
+        SELECT
+            id      AS id,
+            user_id AS userId,
+            money   AS money
+        FROM account
+        WHERE
+            id = #{0}
 
-            select  id as id,name as name,money as money
-			 from account
-			 where
-			id = #{id}
-
-
-        ]]>
-  </select>
+    </select>
     <insert id="insertAccount" parameterType="cn.ting.spring.dynamicdatasourcedemo.model.Account"
             keyColumn="`id`" keyProperty="`id`" useGeneratedKeys="true">
-        insert into account (name,money) values (#{name},#{money})
+        INSERT INTO account (user_id, money) VALUES (#{userId}, #{money})
     </insert>
 </mapper>

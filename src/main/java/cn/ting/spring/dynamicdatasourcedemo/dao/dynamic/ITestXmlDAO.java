@@ -20,6 +20,6 @@ public interface ITestXmlDAO {
 	@Cacheable(value = "indexCache",key = "'xmlgetAccountById'+#id")
 	public Account getAccountById(int id);
 
-	@Cacheable(value = "indexCache",key = "'xmlfindAccountsById'+#id")
-	public List<Account> findAccountsById(int id);
+	@Cacheable(value = "indexCache",key = "'xmlgetAccountByUserId'+#userId")
+	public Account getAccountByUserId(int userId);
 }
