@@ -29,12 +29,13 @@ public class TestDynamicDatabaseService {
     public void test1() {
         logger.info("TestDynamicDatabaseService start...");
 
+        // add money of account1 in current transaction
         logger.info("make account1 money +1");
         if (addMoney(1, 1) > 0) {
             logger.info("money added");
         }
 
-
+        // add money of account2 in a new transaction and make artificial exception.
         try {
             logger.info("make account2 money +1");
             if (accountService.addMoneyTx(2, 1) > 0) {
